@@ -1,0 +1,317 @@
+.hg-candidate-box {
+  display: inline-flex;
+  border-radius: 5px;
+  position: absolute;
+  background: #ececec;
+  border-bottom: 2px solid #b5b5b5;
+  user-select: none;
+  max-width: 272px;
+  transform: translateY(-100%);
+  margin-top: -10px;
+}
+
+ul.hg-candidate-box-list {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex: 1;
+}
+
+li.hg-candidate-box-list-item {
+  height: 40px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+li.hg-candidate-box-list-item:hover {
+  background: rgba(0, 0, 0, 0.03);
+  cursor: pointer;
+}
+
+li.hg-candidate-box-list-item:active {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.hg-candidate-box-prev::before {
+  content: "◄";
+}
+
+.hg-candidate-box-next::before {
+  content: "►";
+}
+
+.hg-candidate-box-next,
+.hg-candidate-box-prev {
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  background: #d0d0d0;
+  color: #969696;
+  cursor: pointer;
+}
+
+.hg-candidate-box-next {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.hg-candidate-box-prev {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.hg-candidate-box-btn-active {
+  color: #444;
+}
+/**
+ * simple-keyboard
+ * Theme: hg-theme-default
+ */
+.simple-keyboard {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 70px;
+
+  margin: auto;
+
+  max-width: 1100px;
+
+  transform: translateY(calc(100% + 70px));
+  transition: transform 1s cubic-bezier(0.83, 0, 0.17, 1);
+  
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 30px;
+}
+
+.simple-keyboard.open {
+  transform: translateY(0);
+  transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.hg-theme-default {
+  --background-color: #1F1F1F;
+  --color: #ffffff;
+  --button-background-color: #1F1F1F;
+  --button-border-color: rgba(255, 255, 255, 0.3);
+  --button-focus-background-color: #FFD600;
+  --button-focus-color: #1F1F1F;
+  --button-enter-background-color: #7E00FF;
+  --button-enter-focus-background-color: #FFFFFF;
+
+  width: 100%;
+  user-select: none;
+  box-sizing: border-box;
+  overflow: hidden;
+  touch-action: manipulation;
+  font-family: 'Darker Grotesque', sans-serif;
+  font-weight: 600;
+  background-color: var(--background-color);
+  color: var(--color);
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-bottom: 40px;
+  padding-top: 80px;
+}
+
+.simple-keyboard .indicator {
+  opacity: 0.6;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 30px;
+
+  width: 50%;
+
+  margin: auto;
+
+  text-align: center;
+}
+
+.simple-keyboard .indicator span {
+  margin-bottom: 2px;
+}
+
+.simple-keyboard .indicator svg {
+  width: 20px;
+  height: 20px;
+
+  margin-left: 10px;
+}
+
+/* Row */
+.hg-theme-default .hg-row {
+  display: flex;
+}
+
+.hg-theme-default .hg-row:not(:last-child) {
+  margin-bottom: 5px;
+}
+
+.hg-theme-default .hg-row .hg-button:not(:last-child) {
+  margin-right: 5px;
+}
+
+.hg-theme-default .hg-row .hg-button-container {
+  margin-right: 5px;
+}
+
+.hg-theme-default .hg-row > div:last-child {
+  margin-right: 0;
+}
+
+.hg-theme-default .hg-row .hg-button-container {
+  display: flex;
+}
+
+.hg-theme-default .hg-button span {
+  pointer-events: none;
+}
+
+/* Buttons */
+.hg-theme-default .hg-button {
+  display: inline-block;
+  flex-grow: 1;
+  cursor: pointer;
+  background-color: var(--button-background-color);
+  font-size: 20px;
+  padding-top: 2px;
+}
+
+.hg-theme-default .hg-button>span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hg-theme-default .hg-button svg {
+    width: 20px;
+    height: 20px;
+
+    margin-top: 4px;
+    margin-left: 10px;
+}
+
+.hg-theme-default .hg-button {
+  display: inline-block;
+  flex-grow: 1;
+  cursor: pointer;
+}
+
+.hg-theme-default .hg-button {
+  height: 40px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding: 5px;
+  padding-top: 2px;
+  background-color: var(--button-background-color);
+  border: 1px solid var(--button-border-color);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.hg-theme-default .hg-button.hg-standardBtn {
+  width: 20px;
+}
+
+.hg-theme-default.hg-layout-numeric .hg-button {
+  width: 33.3%;
+  height: 60px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+/* Buttons numpad */
+.hg-theme-default .hg-button.hg-button-numpadadd {
+  height: 85px;
+}
+
+.hg-theme-default .hg-button.hg-button-numpadenter {
+  height: 85px;
+}
+
+.hg-theme-default .hg-button.hg-button-numpad0 {
+  width: 105px;
+}
+
+/* Click */
+.hg-theme-default .hg-button:active {
+  opacity: 0.4;
+}
+
+/* Click */
+.hg-theme-default .hg-button.active {
+  opacity: 0.4;
+}
+
+/* Focus */
+.hg-theme-default .hg-button.hg-keyMarker {
+  background-color: var(--button-focus-background-color);
+  color: var(--button-focus-color);
+  box-shadow: none !important;
+  border-radius: 10px !important;
+}
+
+.hg-theme-default .hg-button.hg-keyMarker svg path {
+  fill: var(--button-focus-color);
+}
+
+/* Spacial buttons */
+.hg-theme-default .hg-button.hg-button-com {
+  max-width: 85px;
+}
+
+.hg-theme-default .hg-button.hg-standardBtn.hg-button-at {
+  max-width: 45px;
+}
+
+.hg-theme-default .hg-button.hg-standardBtn[data-skbtn=".com"] {
+  max-width: 82px;
+}
+
+.hg-theme-default .hg-button.hg-standardBtn[data-skbtn="@"] {
+  width: calc(2 / 12 * 100%);
+}
+
+.hg-theme-default .hg-button.hg-standardBtn[data-skbtn="{bksp}"] {
+  max-width: 60px;
+}
+
+.hg-theme-default .hg-button.hg-functionBtn[data-skbtn="{space}"] {
+  min-width: 70%;
+}
+
+.hg-theme-default .hg-button.hg-functionBtn[data-skbtn="{shift}"] {
+  /* max-width: 60px; */
+}
+
+.hg-theme-default .hg-button.hg-functionBtn[data-skbtn="{enter}"] {
+    width: calc(2 / 12 * 100%);
+    border-bottom-left-radius: 0px !important;
+    border-top-right-radius: 5px !important;
+    border-bottom-right-radius: 5px !important;
+    font-weight: 600;
+    background-color: var(--button-enter-background-color);
+    border: solid 1px var(--button-enter-background-color);
+  }
+  
+  .hg-theme-default .hg-button.hg-functionBtn[data-skbtn="{enter}"].hg-keyMarker {
+    background-color: var(--button-enter-focus-background-color);
+    border: solid 1px var(--button-enter-focus-background-color);
+}
+
+

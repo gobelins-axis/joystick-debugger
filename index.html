@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Axis Joystick Debugger</title>
+    <link rel="stylesheet" href="./vendor/axis-api/bundle.css">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+    <header class="header">
+        <h1>Axis Joystick Debugger</h1>
+        <div class="pills">
+            <span class="pill" id="pill-source">Source: browser</span>
+            <span class="pill" id="pill-ipc">ipcRenderer: no</span>
+            <span class="pill" id="pill-gamepads">Gamepads: 0</span>
+            <span class="pill" id="pill-serial">Serial: none</span>
+            <span class="pill" id="pill-sleep">Awake</span>
+        </div>
+    </header>
+
+    <main class="grid">
+
+        <!-- Joystick cards are cloned from this template -->
+        <template id="joystick-template">
+            <section class="card joystick">
+                <h2>Joystick <span class="js-id"></span> <span class="rate js-rate">0 Hz</span></h2>
+
+                <div class="joystick-body">
+                    <canvas class="js-canvas" width="300" height="300"></canvas>
+
+                    <div class="readouts">
+                        <h3>Normalized (what your game gets)</h3>
+                        <table>
+                            <tr><th>x</th><td class="js-nx">0.000</td></tr>
+                            <tr><th>y</th><td class="js-ny">0.000</td></tr>
+                            <tr><th>magnitude</th><td class="js-nmag">0.000</td></tr>
+                            <tr><th>angle</th><td class="js-nangle">0°</td></tr>
+                        </table>
+
+                        <h3>Raw ADC (machine only)</h3>
+                        <table>
+                            <tr><th>x</th><td class="js-rx">–</td></tr>
+                            <tr><th>y</th><td class="js-ry">–</td></tr>
+                            <tr><th>rest</th><td class="js-rest">–</td></tr>
+                            <tr><th>min / max x</th><td class="js-rminmaxx">–</td></tr>
+                            <tr><th>min / max y</th><td class="js-rminmaxy">–</td></tr>
+                        </table>
+                        <p class="hint">API calibration: x 18–840, y 36–867. Values outside clip at ±1.</p>
+                        <div class="actions">
+                            <button class="js-reset-range">Reset min/max</button>
+                            <button class="js-recenter">Set rest</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quickmove">
+                    <span class="qm js-qm-left">◀ left <b>0</b></span>
+                    <span class="qm js-qm-up">▲ up <b>0</b></span>
+                    <span class="qm js-qm-down">▼ down <b>0</b></span>
+                    <span class="qm js-qm-right">▶ right <b>0</b></span>
+                </div>
+
+                <canvas class="js-chart chart" width="600" height="120"></canvas>
+                <p class="hint">Chart: <span class="swatch x"></span>x <span class="swatch y"></span>y over the last ~5s. Dashed lines = API calibration bounds.</p>
+            </section>
+        </template>
+
+        <div id="joysticks" class="joysticks"></div>
+
+        <section class="card">
+            <h2>Buttons</h2>
+            <div class="button-groups">
+                <div class="button-group">
+                    <h3>Group 1</h3>
+                    <div class="buttons" data-group="1"></div>
+                </div>
+                <div class="button-group">
+                    <h3>Group 2</h3>
+                    <div class="buttons" data-group="2"></div>
+                </div>
+                <div class="button-group">
+                    <h3>Home</h3>
+                    <div class="buttons" data-group="0"></div>
+                </div>
+            </div>
+            <p class="hint">Keyboard emulation: group 1 = Q D Z S Space · group 2 = ← → ↑ ↓ Enter. Gamepad buttons 0–3 = A X I S (group 1), 4–7 = A X I S (group 2).</p>
+        </section>
+
+        <section class="card">
+            <h2>Settings (live)</h2>
+            <label>Deadzone <input type="range" id="deadzone" min="0" max="0.6" step="0.01" value="0.2"> <span id="deadzone-value">0.20</span></label>
+            <label>Quickmove threshold <input type="range" id="threshold" min="0" max="0.5" step="0.01" value="0.1"> <span id="threshold-value">0.10</span></label>
+            <label>Trail length <input type="range" id="trail" min="0" max="200" step="10" value="60"> <span id="trail-value">60</span></label>
+            <p class="hint">Deadzone and threshold are written to Axis.joystick1 / joystick2 so you can tune the API config.</p>
+        </section>
+
+        <section class="card log-card">
+            <h2>Event log <button id="clear-log">Clear</button></h2>
+            <pre id="log" class="log"></pre>
+        </section>
+
+    </main>
+
+    <script src="./vendor/axis-api/bundle.js"></script>
+    <script src="./app.js"></script>
+</body>
+</html>
