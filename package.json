@@ -1,0 +1,18 @@
+{
+  "name": "axis-joystick-debug",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Joystick and button debugger for the Axis arcade machine",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "axis-api": "github:gobelins-axis/axis-api"
+  },
+  "devDependencies": {
+    "vite": "^6.3.5"
+  }
+}

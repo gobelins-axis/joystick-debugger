@@ -1,8 +1,8 @@
-/* global bundle */
+import { Axis } from 'axis-api';
+import 'axis-api/build/bundle.css';
+
 (function () {
     'use strict';
-
-    const Axis = bundle.default;
 
     // API calibration (see axis-api/src/utils/normalizeJoystickSignal.js)
     const CALIBRATION = {
@@ -441,13 +441,13 @@
         setPill('pill-source', 'Source: machine', 'ok');
         log('ipcRenderer attached, listening to raw joystick:move');
 
-        ipc.on('joystick:move', (event, data) => {
+        ipc.on('joystick:move', (_event, data) => {
             const view = views[data.id - 1];
             if (view) onRaw(view, data.position);
             lastSerialTime = performance.now();
         });
 
-        ipc.on('altenative:move', (event, data) => {
+        ipc.on('altenative:move', (_event, data) => {
             log(`alternative-analog ${data.id}: ${data.position}`);
         });
     }

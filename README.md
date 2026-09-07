@@ -2,7 +2,7 @@
 
 A single-page tool to inspect what the Axis machine's joysticks and buttons are sending, both on the machine itself and in browser emulation mode.
 
-No build step. Plain HTML/CSS/JS plus the vendored [axis-api](https://github.com/gobelins-axis/axis-api) bundle.
+Plain HTML/CSS/JS bundled with [Vite](https://vite.dev). [axis-api](https://github.com/gobelins-axis/axis-api) is installed from GitHub through npm.
 
 ## What it shows
 
@@ -24,13 +24,13 @@ Also:
 
 ## Run locally
 
-Any static server works:
-
 ```bash
-npx serve .
-# or
-python3 -m http.server 8080
+npm install
+npm run dev
 ```
+
+`npm run build` writes the static site to `dist/`, `npm run preview` serves it.
+The build targets Chromium 98, which is what the launcher's Electron 17 ships.
 
 Browser emulation:
 
@@ -45,19 +45,21 @@ Raw ADC values only exist on the machine, where the Electron launcher forwards t
 
 ## Deploy to Netlify
 
-The repo is ready as-is (`netlify.toml` publishes the root, no build command).
+`netlify.toml` already sets the build command (`npm run build`), the publish directory (`dist`) and Node 22.
 
 1. Push this repo to GitHub / GitLab.
-2. In Netlify: **Add new site → Import an existing project**, pick the repo, keep the defaults, deploy.
+2. In Netlify: **Add new site → Import an existing project**, pick the repo, keep the detected settings, deploy.
 
-Or drag and drop the folder on https://app.netlify.com/drop.
+Or build locally and drag and drop the `dist` folder on https://app.netlify.com/drop.
 
 ## Open it on the machine
 
 The launcher opens games by URL (`url:changed` IPC from the launcher front). Add the Netlify URL as a game in the hub, or point the launcher's `WindowManager` URL at it in `axis-launcher-electron/src/main.js` for a quick test.
 
-## Updating the API bundle
+## Updating the API
 
 ```bash
-cp ../axis-api/build/bundle.js ../axis-api/build/bundle.css vendor/axis-api/
+npm update axis-api
 ```
+
+The package is pinned to the `main` branch of `gobelins-axis/axis-api`, whose `build/bundle.js` is committed by the repo's GitHub Action.
