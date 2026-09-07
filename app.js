@@ -4,6 +4,12 @@ import 'axis-api/build/bundle.css';
 (function () {
     'use strict';
 
+    // Hand over the ipcRenderer if the preload ran before this module (see index.html shim).
+    if (window.__axis_pending_ipc__) {
+        window.__axis__.set_ipc_renderer(window.__axis_pending_ipc__);
+        delete window.__axis_pending_ipc__;
+    }
+
     // API calibration (see axis-api/src/utils/normalizeJoystickSignal.js)
     const CALIBRATION = {
         x: { min: 18, max: 840 },

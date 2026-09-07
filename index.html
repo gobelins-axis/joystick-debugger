@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Axis Joystick Debugger</title>
     <link rel="stylesheet" href="./style.css">
+    <script>
+        // The Axis launcher preload looks for window.__axis__ at DOMContentLoaded and
+        // exits the game if it is missing. The real object is created when the module
+        // below runs; this shim holds the ipcRenderer until then.
+        window.__axis__ = {
+            set_ipc_renderer: function (ipcRenderer) { window.__axis_pending_ipc__ = ipcRenderer; },
+        };
+    </script>
 </head>
 <body>
 
